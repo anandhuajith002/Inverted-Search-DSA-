@@ -9,3 +9,5 @@ Status addToList(LIST **head,char *filename,FILE *fptr);
 
 //check for duplicate in list
 Status noDuplicate(LIST *head,char *filename);
+
+void displayMenu();

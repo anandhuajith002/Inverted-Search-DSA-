@@ -65,3 +65,17 @@ Status noDuplicate(LIST *head,char *filename)
 
     
 }
+
+void displayMenu()
+{
+    printf("\n");
+    printf("+----------------------+\n");
+    printf("|   Inverted Search   |\n");
+    printf("+----------------------+\n");
+    printf("| 1. Create Database  |\n");
+    printf("| 2. Display Database |\n");
+    printf("| 3. Search Database  |\n");
+    printf("| 4. Save Database    |\n");
+    printf("| 5. Update Database  |\n");
+    printf("+----------------------+\n");
+}

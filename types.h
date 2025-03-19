@@ -19,6 +19,28 @@ typedef struct node
 
 }LIST;
 
+typedef struct subnode
+{
+    int wordcount;
+    char filename[15];
+    struct subnode *link;
+
+}SUB_NODE;
+
+typedef struct mainnode
+{
+    int filecount;
+    char word[50];
+    struct mainnode *mainlink;
+    struct subnode * sublink;
+}MAIN_NODE;
+
+
+typedef struct hash
+{
+    int index;
+    struct mainnode * link;
+}HASH_T;
 
 
 #endif // !TYPES_H

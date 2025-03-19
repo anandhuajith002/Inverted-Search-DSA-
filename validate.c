@@ -6,6 +6,8 @@
 
 Status readAndValidate(int argc,char **argv,LIST **head)
 {
+    *head=NULL;
+    
     if(argc<2)
     {
         printf("[INFO]: Error in number of arguments\n");
@@ -59,7 +61,6 @@ Status readAndValidate(int argc,char **argv,LIST **head)
 
 }
 
-
 Status checkExt(char *filename)
 {
     char *sub=strstr(filename,".txt");
@@ -86,10 +87,10 @@ Status checkFileContent(FILE *fptr)
     fseek(fptr,0,SEEK_END);
     if(ftell(fptr)!=0)
     {
+        fseek(fptr,0,SEEK_SET);
         return SUCCESS;
     }
     return FAILURE;
 
 }
-
 
