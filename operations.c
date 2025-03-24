@@ -45,6 +45,34 @@ Status addToList(LIST **head,char *filename,FILE *fptr)
     return SUCCESS;
 
 }
+Status removeFromList(LIST **head, char *filename)
+ {
+    if (*head == NULL) {
+        return FAILURE; // List is empty
+    }
+    
+    LIST *temp = *head, *prev = NULL;
+    
+    if (strcmp(temp->filename, filename) == 0) {
+        *head = temp->link;
+        free(temp);
+        return SUCCESS;
+    }
+    
+    while (temp != NULL && strcmp(temp->filename, filename) != 0) {
+        prev = temp;
+        temp = temp->link;
+    }
+    
+    if (temp == NULL) {
+        return FAILURE;
+    }
+    
+    prev->link = temp->link;
+    free(temp);
+    return SUCCESS;
+}
+
 Status noDuplicate(LIST *head,char *filename)
 {
     if(head==NULL)
@@ -70,12 +98,13 @@ void displayMenu()
 {
     printf("\n");
     printf("+----------------------+\n");
-    printf("|   Inverted Search   |\n");
+    printf("|   Inverted Search    |\n");
     printf("+----------------------+\n");
-    printf("| 1. Create Database  |\n");
-    printf("| 2. Display Database |\n");
-    printf("| 3. Search Database  |\n");
-    printf("| 4. Save Database    |\n");
-    printf("| 5. Update Database  |\n");
+    printf("| 1. Create Database   |\n");
+    printf("| 2. Display Database  |\n");
+    printf("| 3. Search Database   |\n");
+    printf("| 4. Save Database     |\n");
+    printf("| 5. Update Database   |\n");
+    printf("| 6. Exit              |\n");
     printf("+----------------------+\n");
 }

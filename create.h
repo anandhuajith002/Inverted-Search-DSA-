@@ -25,6 +25,6 @@ MAIN_NODE* createMainNode(char *str);
 
 Status addToSubNode(MAIN_NODE* mainNode,char *filename);
 
-void displayDatabase(HASH_T *H_table);
+SUB_NODE* createSubNode(char *filename);
 
 #endif

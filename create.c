@@ -19,6 +19,18 @@ Status initialiseHTable(HASH_T *H_table)
         H_table[i].link=NULL;
     }
 }
+SUB_NODE* createSubNode(char *filename)
+{
+    SUB_NODE *new=malloc(sizeof(SUB_NODE));
+    if(new==NULL)
+    {
+        return NULL;
+    }
+    new->link=NULL;
+    new->wordcount=1;
+    strcpy(new->filename,filename);
+    return new;
+}
 Status addToSubNode(MAIN_NODE* mainNode,char *filename)
 {
     
@@ -28,15 +40,11 @@ Status addToSubNode(MAIN_NODE* mainNode,char *filename)
     
     if(temp==NULL)
     {
-        SUB_NODE *new=malloc(sizeof(SUB_NODE));
+        SUB_NODE *new=createSubNode(filename);
         if(new==NULL)
         {
             return FAILURE;
         }
-        new->wordcount=1;
-        strcpy(new->filename,filename);
-        new->link=NULL;
-
         mainNode->sublink=new;
         return SUCCESS;
     }
@@ -52,16 +60,13 @@ Status addToSubNode(MAIN_NODE* mainNode,char *filename)
         temp=temp->link;
     }
 
-    SUB_NODE *new=malloc(sizeof(SUB_NODE));
+    SUB_NODE *new=createSubNode(filename);
     if(new==NULL)
     {
         return FAILURE;
     }
     prev->link=new;
-    new->wordcount=1;
     mainNode->filecount++;
-    strcpy(new->filename,filename);
-    new->link=NULL;    
     return SUCCESS;
     
 }
@@ -171,26 +176,3 @@ Status createDatabase(HASH_T *H_table,LIST **head)
     
 }
 
-void displayDatabase(HASH_T *H_table) 
-{
-    printf("\n[INFO]: Displaying Hash Table\n");
-    
-    for (int i = 0; i < 28; i++) {
-        if (H_table[i].link != NULL) {
-            printf("\nIndex %d:\n", i);
-
-            MAIN_NODE *mainNode = H_table[i].link;
-            while (mainNode != NULL) {
-                printf("  Word: %s, File Count: %d\n", mainNode->word, mainNode->filecount);
-
-                SUB_NODE *subNode = mainNode->sublink;
-                while (subNode != NULL) {
-                    printf("    File: %s, Word Count: %d\n", subNode->filename, subNode->wordcount);
-                    subNode = subNode->link;
-                }
-
-                mainNode = mainNode->mainlink;
-            }
-        }
-    }
-}
